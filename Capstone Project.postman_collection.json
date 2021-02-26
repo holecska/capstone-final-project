@@ -1,0 +1,578 @@
+{
+	"info": {
+		"_postman_id": "09ccfabd-0223-43fc-97c6-13d1eb6c61c4",
+		"name": "Capstone Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Casting Assistant",
+			"item": [
+				{
+					"name": "GET movies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET actors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH movie - Role Test",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"const schema = {\r",
+									"    \"error\": {\"type\": \"integer\"}, \r",
+									"    \"message\": \r",
+									"    {\r",
+									"        \"code\": {\"type\": \"string\"}, \r",
+									"        \"description\": {\"type\": \"string\"}\r",
+									"    }, \r",
+									"    \"success\": {\"type\": \"boolean\"}\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function(){\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"pm.test(\"Status code is 401\", function () {\r",
+									"  pm.response.to.have.status(401);\r",
+									"});\r",
+									"pm.test('Error message', function(){\r",
+									"    pm.expect(jsonData.message[\"description\"]).to.eql(\"Permission not found.\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"release_date\": \"2019.10.03\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/{{movie_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"{{movie_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlBfVnJpcDNjMl91R093UVluQkp0SSJ9.eyJpc3MiOiJodHRwczovL2hvbGVjc2thLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MDM2YTEwYjg1MzY3NTAwNmZkZTZlOGIiLCJhdWQiOiJjYXBzdG9uZV9pZGVudGlmaWVyIiwiaWF0IjoxNjE0MzY3NTI0LCJleHAiOjE2MTQzNzQ3MjQsImF6cCI6InFoREpWNzBzdlZjTm5qUmtIVVV0eHFPRHlGcXoxbFRKIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6ZWxlbWVudHMiXX0.Q7Ntd2uehEtbLeSAuRn6PPRJjRiNtQ7OIraQrJk7TCyMng8HlSKWfz9uEhdwCs6mwN7V-1t_lBOTswKKlEjdUZKYTfx1J5Sq4sF5fyO-CdnmKTa5lXdlb2vesD3DXWM037lrM-LNHhl2kWcsxbkK1_mJ0Mh_9bQO5aGWGm1r1bKjV_S1WbEl_U5txJN6jzMUD3tuR1VrGyQpxbdVeiQoaZkmcwMP4n2_BXkIYTaGuAz7CNjd0eEKGIxmObtqXkbvMVgOuM0LoAThfgWQgcoXnfFM-v-YX4uP8cZhYT8sgd3K0WoF5NzvkNAQBYpZOFrMK866_RSh9HjAw-4ZoMSMLQ",
+						"type": "string"
+					}
+				]
+			}
+		},
+		{
+			"name": "Casting Director",
+			"item": [
+				{
+					"name": "POST actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"const schema = {\r",
+									"    \"actor\": \r",
+									"        {\r",
+									"            \"id\": {\"type\": \"integer\"},\r",
+									"            \"name\": {\"type\": \"string\"},\r",
+									"            \"age\": {\"type\": \"integer\"},\r",
+									"            \"gender\": {\"type\": \"string\"}\r",
+									"        },\r",
+									"    \"success\": {\"type\": \"boolean\"}\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function(){\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"const id_curent = jsonData.actor.id;\r",
+									"pm.collectionVariables.set(\"actor_id\", id_curent );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Joaquin Phoenix\", \r\n    \"age\": \"46\", \r\n    \"gender\": \"men\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test an Attribute Error",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {\r",
+									"  pm.response.to.have.status(422);\r",
+									"});\r",
+									"pm.test(\"The response has all properties\", () => {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.message).to.eql(\"You are trying to modify an attribute which does not exist\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title_test\": \"New Film\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/actors/{{actor_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"actors",
+								"{{actor_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH an ACTOR",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"const schema = {\r",
+									"    \"success\": {\"type\": \"boolean\"}, \r",
+									"    \"changed_actor\": {\"type\": \"integer\"}\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function(){\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"age\": \"47\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/{{actor_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"{{actor_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"const schema = {\r",
+									"    \"success\": {\"type\": \"boolean\"}, \r",
+									"    \"deleted_actor\": {\"type\": \"integer\"}\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function(){\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/{{actor_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"{{actor_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST movie - Role Test",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"const schema = {\r",
+									"    \"error\": {\"type\": \"integer\"}, \r",
+									"    \"message\": \r",
+									"    {\r",
+									"        \"code\": {\"type\": \"string\"}, \r",
+									"        \"description\": {\"type\": \"string\"}\r",
+									"    }, \r",
+									"    \"success\": {\"type\": \"boolean\"}\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function(){\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"pm.test(\"Status code is 401\", function () {\r",
+									"  pm.response.to.have.status(401);\r",
+									"});\r",
+									"pm.test('Error message', function(){\r",
+									"    pm.expect(jsonData.message[\"code\"]).to.eql(\"forbidden\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Joker - Test\",\r\n    \"release_date\": \"2018\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlBfVnJpcDNjMl91R093UVluQkp0SSJ9.eyJpc3MiOiJodHRwczovL2hvbGVjc2thLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MDM5NDZkYjUwMTg1ZDAwNjgyMWVmMzEiLCJhdWQiOiJjYXBzdG9uZV9pZGVudGlmaWVyIiwiaWF0IjoxNjE0MzY3OTc2LCJleHAiOjE2MTQzNzUxNzYsImF6cCI6InFoREpWNzBzdlZjTm5qUmtIVVV0eHFPRHlGcXoxbFRKIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZ2V0OmVsZW1lbnRzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiXX0.pjTlDesRCzyTdL2_d14nQ1LzU7RTBVrjJSkAo5wIVbZWt1DqcyiwWi2y9goeyxZXk3-ctqz6wOuZx_-S-0u46VXjatO6V-h9uZFr6yRMgthrSLVt15mOQSgdoJBT-D2FXRPgWvRVCu0vs8ItGLVhedOmwcR-Kj2ROyNYWL1jZSIxfLOWKEL3oImWEXP5bUFzfnEk0lqWRO9Ef0I3mf_AAmxZJE383ZOrBjZhPFlAdz-2FA9_vl96yzpEBPYtJJ5MAPYroYZjc89-kfzmSg46TnbMl_LihQe1ds5ge02rQf-hbY9XUayDoEcHnJy6HCmT3-vj960Uj5cPPIRyEq_Dcw",
+						"type": "string"
+					}
+				]
+			}
+		},
+		{
+			"name": "Executive Producer",
+			"item": [
+				{
+					"name": "POST movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"const schema = {\r",
+									"    \"movie\": \r",
+									"    {\r",
+									"        \"title\": {\"type\": \"string\"}, \r",
+									"        \"release_date\": {\"type\": \"date\"}\r",
+									"    },\r",
+									"    \"success\": {\"type\": \"boolean\"}\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function(){\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});\r",
+									"const id_curent = jsonData.movie.id;\r",
+									"pm.collectionVariables.set(\"movie_id\", id_curent );"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Joker\",\r\n    \"release_date\": \"2019\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PATCH movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"const schema = {\r",
+									"    \"success\": {\"type\": \"boolean\"}, \r",
+									"    \"changed_movie\": {\"type\": \"integer\"}\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function(){\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"release_date\": \"2019.10.03\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/{{movie_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"{{movie_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE movie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"const schema = {\r",
+									"    \"success\": {\"type\": \"boolean\"}, \r",
+									"    \"deleted_movie\": {\"type\": \"integer\"}\r",
+									"};\r",
+									"\r",
+									"pm.test('Schema is valid', function(){\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"  pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies/{{movie_id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"{{movie_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlBfVnJpcDNjMl91R093UVluQkp0SSJ9.eyJpc3MiOiJodHRwczovL2hvbGVjc2thLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MDM5NDc0MTc3YzNmMzAwNjk2MmUxOWQiLCJhdWQiOiJjYXBzdG9uZV9pZGVudGlmaWVyIiwiaWF0IjoxNjE0MzcyMDExLCJleHAiOjE2MTQzNzkyMTEsImF6cCI6InFoREpWNzBzdlZjTm5qUmtIVVV0eHFPRHlGcXoxbFRKIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDplbGVtZW50cyIsInBhaXI6YWN0b3JzX21vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDptb3ZpZXMiXX0.izQjZVGlIhgDmZABaISppl1_Ij0rwn5XUngnpWrWBAlmXjv-YGuou3HP_jEmP8JQlO-JeFFf6AlFZ1lsB-Ic_ulMyK0dIlr9pXH_OrFHb5RUfeFUX1JLWH1LZVQMfGO8Ne0psE2rRkqjWd7lpP9F3HeVRVWfqhftRhsDo2mLAlk-Pth2qtPTji7r6SK_Y1rpSgnY5sydYiA-wxr3VX7IUrbHzV3PJC5-ZyaDCpJhptx0NPbJ5Azfsf4qFAbbisLsQJ0X1Fdw2yyecqLVoCv5QPfPKSKfpKaTGHgK53HZUmHfoS3o6q5sBBOxKe_tGPoajKKtFWUsfqac5HEsosX6jw",
+						"type": "string"
+					}
+				]
+			}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:5000"
+		},
+		{
+			"key": "actor_id",
+			"value": ""
+		},
+		{
+			"key": "movie_id",
+			"value": ""
+		}
+	]
+}
