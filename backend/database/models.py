@@ -2,7 +2,7 @@ from sqlalchemy import Table, Column, String, Integer, Date, create_engine
 from sqlalchemy.orm import relationship, backref
 from flask_sqlalchemy import SQLAlchemy
 from .config import Config
-from flask_migrate import Migrate
+#from flask_migrate import Migrate
 
 
 path = Config()
@@ -20,7 +20,7 @@ def setup_db(app, database_path= db_path):
     db.app = app
     db.init_app(app)
     db.create_all()
-    migrate = Migrate(app, db)
+    #migrate = Migrate(app, db)
 
 association_table = db.Table('association',
                 db.Column('movie_id', db.Integer, db.ForeignKey('movies.id')),
@@ -38,9 +38,6 @@ class Movie(db.Model):
   title = Column(String, nullable=False, unique=True)
   release_date = Column(Date)
   artists = relationship('Actor', secondary=association_table, backref='actor' )
-  # def __init__(self, title, release_date):
-  #   self.title = title
-  #   self.release_date = release_date
 
   def insert(self):
     db.session.add(self)

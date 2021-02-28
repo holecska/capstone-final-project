@@ -5,13 +5,12 @@ from flask import Flask, request, jsonify, abort
 from flask_cors import CORS
 from sqlalchemy import exc
 
-from .database.models import setup_db, Movie, Actor
-from .auth.auth import AuthError, requires_auth
+from ..database.models import setup_db, Movie, Actor
+from ..auth.auth import AuthError, requires_auth
 
 #----------------------------------------------------------------------------#
 # App Config.
 #----------------------------------------------------------------------------#
-
 app = Flask(__name__)
 setup_db(app)
 CORS(app)
@@ -19,8 +18,6 @@ CORS(app)
 # ----------------------------------------------------------------------------
 # CORS Headers
 # ----------------------------------------------------------------------------
-
-
 @app.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Headers',
@@ -28,7 +25,6 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods',
                          'GET,PUT,POST,DELETE,OPTIONS')
     return response
-
 
 # APIs
 
