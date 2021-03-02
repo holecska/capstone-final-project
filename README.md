@@ -4,7 +4,7 @@ Uploading the final project for the Full Stack Nanodegree Program at Udacity.
 
 ## The Application is hosted at:
 
-https:...
+https://udacity-capstone-adam-holecska.herokuapp.com/
 
 ## Instructions to set up authentication:
 
