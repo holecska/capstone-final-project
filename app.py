@@ -5,8 +5,8 @@ from flask import Flask, request, jsonify, abort
 from flask_cors import CORS
 from sqlalchemy import exc
 
-from database.models import setup_db, Movie, Actor
-from auth.auth import AuthError, requires_auth
+from backend.database.models import setup_db, Movie, Actor
+from backend.auth.auth import AuthError, requires_auth
 
 #----------------------------------------------------------------------------#
 # App Config.
