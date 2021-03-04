@@ -11,8 +11,8 @@ from backend.auth.auth import AuthError, requires_auth
 #----------------------------------------------------------------------------#
 # App Config.
 #----------------------------------------------------------------------------#
-app = Flask(__name__)
 
+app = Flask(__name__)
 setup_db(app)
 CORS(app)
 
@@ -48,7 +48,6 @@ def get_movies(jwt):
 # ----------------------------------------------------------------------------
 # GET ACTORS
 # ----------------------------------------------------------------------------
-
 @app.route('/actors')
 @requires_auth('get:elements')
 def get_actors(jwt):
@@ -61,11 +60,9 @@ def get_actors(jwt):
         'actor': actor_formatted
     })
 
-
 # ----------------------------------------------------------------------------
 # ADD MOVIES
 # ----------------------------------------------------------------------------
-
 @app.route('/movies', methods=['POST'])
 @requires_auth('post:movies')
 def add_movies(jwt):
@@ -89,7 +86,6 @@ def add_movies(jwt):
 # ----------------------------------------------------------------------------
 # ADD ACTORS
 # ----------------------------------------------------------------------------
-
 @app.route('/actors', methods=['POST'])
 @requires_auth('post:actors')
 def add_actors(jwt):
@@ -203,17 +199,9 @@ def delete_movie(jwt, id):
 # ----------------------------------------------------------------------------
 # Error Handling
 # ----------------------------------------------------------------------------
-
-
 class IntegrityErrorRaised(Exception):
-
     def __init__(self, error_message="An error has occured, try it again!"):
         self.message = error_message
-
-
-'''
-Example error handling for unprocessable entity
-'''
 
 @app.errorhandler(IntegrityErrorRaised)
 def integrity_problem(error):
@@ -225,14 +213,8 @@ def integrity_problem(error):
     }), 422
 
 class AttributeErrorRaised(Exception):
-
     def __init__(self, error_message="An error has occured, try it again!"):
         self.message = error_message
-
-
-'''
-Example error handling for unprocessable entity
-'''
 
 @app.errorhandler(AttributeErrorRaised)
 def attr_problem(error):
@@ -277,6 +259,8 @@ def auth_error(AuthError):
         "error": AuthError.status_code,
         "message": AuthError.error
     }), AuthError.status_code
+
+
 #----------------------------------------------------------------------------#
 # Launch.
 #----------------------------------------------------------------------------#
