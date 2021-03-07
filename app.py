@@ -156,7 +156,7 @@ def create_app(test_config=None):
                 setattr(actor, key, body[key])
             else:
                 raise AttributeErrorRaised(
-                      ('You are trying to modify an attribute which does not'
+                      ('You are trying to modify an attribute which does not '
                        'exist'))
 
         actor.update()
