@@ -107,25 +107,27 @@ The API will return four error types when requests fail:
 	Returns of an object with actors and a success value (True/False)
 - Sample: `curl http://127.0.0.1:5000/actors`
 - Returns
+
 ```
-{
-  "actors": [
-	    {
-				"age": 46,
-				"id": 1,
-				"name": "Actor 1",
-				"gender": "men"
-			},
-			{
-				"age": 26,
-				"id": 1,
-				"name": "Actor 1",
-				"gender": "women"
-			}
-  ],
-  "success": true
-}
+    {
+      "actors": [
+    	    {
+    				"age": 46,
+    				"id": 1,
+    				"name": "Actor 1",
+    				"gender": "men"
+    			},
+    			{
+    				"age": 26,
+    				"id": 1,
+    				"name": "Actor 1",
+    				"gender": "women"
+    			}
+      ],
+      "success": true
+    }
 ```
+
 #### POST /movies
 - General:
 	Add a new movie to the database and returns the currently added movie and a success value (True/False)
