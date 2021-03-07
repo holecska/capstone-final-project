@@ -16,4 +16,16 @@ class ProductionConfig(Config):
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "postgresql://{}:{}@{}/{}".format(Config.DB_USERNAME, Config.DB_PASSWORD, Config.DB_HOST, Config.DB_NAME)
+    SQLALCHEMY_DATABASE_URI = "postgresql://{}:{}@{}/{}".format(
+                                                        Config.DB_USERNAME,
+                                                        Config.DB_PASSWORD,
+                                                        Config.DB_HOST,
+                                                        Config.DB_NAME)
+
+class TestingConfig(Config):
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = "postgresql://{}:{}@{}/{}".format(
+                                                        'postgres',
+                                                        'admin',
+                                                        '127.0.0.1:5432',
+                                                        'capstone_test')

@@ -10,12 +10,19 @@ setup_db(app)
     binds a flask application and a SQLAlchemy service
 '''
 
-def setup_db(app):
 
-    if app.config['ENV'] == 'production':
-        app.config.from_object('config.ProductionConfig')
+def setup_db(app, test_config):
+
+    if test_config is None:
+        if app.config['ENV'] == 'production':
+            app.config.from_object('config.ProductionConfig')
+        elif app.config['ENV'] == 'testing':
+            app.config.from_object('config.TestingConfig')
+        else:
+            app.config.from_object('config.DevelopmentConfig')
     else:
-        app.config.from_object('config.DevelopmentConfig')
+        app.config["SQLALCHEMY_DATABASE_URI"] = test_config
+        app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     db.app = app
     db.init_app(app)

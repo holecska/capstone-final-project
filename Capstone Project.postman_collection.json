@@ -67,7 +67,7 @@
 									"  pm.response.to.have.status(401);\r",
 									"});\r",
 									"pm.test('Error message', function(){\r",
-									"    pm.expect(jsonData.message[\"description\"]).to.eql(\"Permission not found.\");\r",
+									"    pm.expect(jsonData.message[\"description\"]).to.eql(\"Permission not found. - method not allowed\");\r",
 									"});\r",
 									""
 								],
@@ -88,13 +88,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/movies/{{movie_id}}",
+							"raw": "{{host}}/actors/{{actor_id}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"movies",
-								"{{movie_id}}"
+								"actors",
+								"{{actor_id}}"
 							]
 						}
 					},
@@ -106,11 +106,31 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlBfVnJpcDNjMl91R093UVluQkp0SSJ9.eyJpc3MiOiJodHRwczovL2hvbGVjc2thLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MDM2YTEwYjg1MzY3NTAwNmZkZTZlOGIiLCJhdWQiOiJjYXBzdG9uZV9pZGVudGlmaWVyIiwiaWF0IjoxNjE0MzY3NTI0LCJleHAiOjE2MTQzNzQ3MjQsImF6cCI6InFoREpWNzBzdlZjTm5qUmtIVVV0eHFPRHlGcXoxbFRKIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6ZWxlbWVudHMiXX0.Q7Ntd2uehEtbLeSAuRn6PPRJjRiNtQ7OIraQrJk7TCyMng8HlSKWfz9uEhdwCs6mwN7V-1t_lBOTswKKlEjdUZKYTfx1J5Sq4sF5fyO-CdnmKTa5lXdlb2vesD3DXWM037lrM-LNHhl2kWcsxbkK1_mJ0Mh_9bQO5aGWGm1r1bKjV_S1WbEl_U5txJN6jzMUD3tuR1VrGyQpxbdVeiQoaZkmcwMP4n2_BXkIYTaGuAz7CNjd0eEKGIxmObtqXkbvMVgOuM0LoAThfgWQgcoXnfFM-v-YX4uP8cZhYT8sgd3K0WoF5NzvkNAQBYpZOFrMK866_RSh9HjAw-4ZoMSMLQ",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlBfVnJpcDNjMl91R093UVluQkp0SSJ9.eyJpc3MiOiJodHRwczovL2hvbGVjc2thLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MDM2YTEwYjg1MzY3NTAwNmZkZTZlOGIiLCJhdWQiOiJjYXBzdG9uZV9pZGVudGlmaWVyIiwiaWF0IjoxNjE1MDU2MTUwLCJleHAiOjE2MTUwNjMzNTAsImF6cCI6InFoREpWNzBzdlZjTm5qUmtIVVV0eHFPRHlGcXoxbFRKIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6ZWxlbWVudHMiXX0.KE2CYea8Qu79Z9tSb0e8jeMBmp-kttHxPhY0rEpXc_5i6Bla3k8fXADV_B_fY2n5wAQy8aemxHuvwqCUopP7IT8etXZH_bw4R0s-lWvZ149GjnEzUhBNBwjf-NTPIwqyofZLAzKEXPs3f82DEihXBVQHmZ2uLAzVodz7UpThe-2gwbbRMeeitRJpeMJAUp9Tvc3wkkd05CcbM0GEkJ1ujSyZInJy1ZLQGPUDp9qieb0oQcIs3YhgzO4E0OqEkWReKMVB-3pfN492NjwZsnm6vIKCS2D93CT3PF0Y0gUC3zP8Cl2UlSU5t1x9bDX6WEfZRBqo5SGE0DICM-5PHG4a3g",
 						"type": "string"
 					}
 				]
-			}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		},
 		{
 			"name": "Casting Director",
@@ -376,11 +396,31 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlBfVnJpcDNjMl91R093UVluQkp0SSJ9.eyJpc3MiOiJodHRwczovL2hvbGVjc2thLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MDM5NDZkYjUwMTg1ZDAwNjgyMWVmMzEiLCJhdWQiOiJjYXBzdG9uZV9pZGVudGlmaWVyIiwiaWF0IjoxNjE0MzY3OTc2LCJleHAiOjE2MTQzNzUxNzYsImF6cCI6InFoREpWNzBzdlZjTm5qUmtIVVV0eHFPRHlGcXoxbFRKIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZ2V0OmVsZW1lbnRzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiXX0.pjTlDesRCzyTdL2_d14nQ1LzU7RTBVrjJSkAo5wIVbZWt1DqcyiwWi2y9goeyxZXk3-ctqz6wOuZx_-S-0u46VXjatO6V-h9uZFr6yRMgthrSLVt15mOQSgdoJBT-D2FXRPgWvRVCu0vs8ItGLVhedOmwcR-Kj2ROyNYWL1jZSIxfLOWKEL3oImWEXP5bUFzfnEk0lqWRO9Ef0I3mf_AAmxZJE383ZOrBjZhPFlAdz-2FA9_vl96yzpEBPYtJJ5MAPYroYZjc89-kfzmSg46TnbMl_LihQe1ds5ge02rQf-hbY9XUayDoEcHnJy6HCmT3-vj960Uj5cPPIRyEq_Dcw",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlBfVnJpcDNjMl91R093UVluQkp0SSJ9.eyJpc3MiOiJodHRwczovL2hvbGVjc2thLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MDM5NDZkYjUwMTg1ZDAwNjgyMWVmMzEiLCJhdWQiOiJjYXBzdG9uZV9pZGVudGlmaWVyIiwiaWF0IjoxNjE1MDYxNDk2LCJleHAiOjE2MTUwNjg2OTYsImF6cCI6InFoREpWNzBzdlZjTm5qUmtIVVV0eHFPRHlGcXoxbFRKIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZ2V0OmVsZW1lbnRzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiXX0.D7HKlbzm0EMQwSpPuJmOySqvphpcHz1t_eHi6dMHRPs4RET2beFy2LL45zafdhBmR-eeAdY4E2Jbtfsw6E9tTrYQjChkBqgZ86mbmivFWeLgcqoB6EQGZ9kHp-RobV60kDRB6MXtPUXf-etol5WdYBm3vGjSr-Pd7dC4usFIijSr2LCgXynJuLEXf_m_whnDWMgYGrzqiRCq2pYw75GL_wiNBtDaaOEv7vKJMbwQef8tR6XSHsKOeNUpGWK8QRKXkksotQ4wSrLVOHs_LlAI3Gu4z4sDRHYTrUWmPJ5AaDRuf8TobuIVxTX14uszPVc-16S_3BDKkmwkba5Pq-i1cQ",
 						"type": "string"
 					}
 				]
-			}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		},
 		{
 			"name": "Executive Producer",
@@ -420,7 +460,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Joker\",\r\n    \"release_date\": \"2019\"\r\n}",
+							"raw": "{\r\n    \"title\": \"Joker\",\r\n    \"release_date\": \"2019.10.03\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -468,7 +508,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"release_date\": \"2019.10.03\"\r\n}",
+							"raw": "{\r\n    \"release_date\": \"2019.10.17\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -534,11 +574,31 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlBfVnJpcDNjMl91R093UVluQkp0SSJ9.eyJpc3MiOiJodHRwczovL2hvbGVjc2thLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MDM5NDc0MTc3YzNmMzAwNjk2MmUxOWQiLCJhdWQiOiJjYXBzdG9uZV9pZGVudGlmaWVyIiwiaWF0IjoxNjE0MzcyMDExLCJleHAiOjE2MTQzNzkyMTEsImF6cCI6InFoREpWNzBzdlZjTm5qUmtIVVV0eHFPRHlGcXoxbFRKIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDplbGVtZW50cyIsInBhaXI6YWN0b3JzX21vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDptb3ZpZXMiXX0.izQjZVGlIhgDmZABaISppl1_Ij0rwn5XUngnpWrWBAlmXjv-YGuou3HP_jEmP8JQlO-JeFFf6AlFZ1lsB-Ic_ulMyK0dIlr9pXH_OrFHb5RUfeFUX1JLWH1LZVQMfGO8Ne0psE2rRkqjWd7lpP9F3HeVRVWfqhftRhsDo2mLAlk-Pth2qtPTji7r6SK_Y1rpSgnY5sydYiA-wxr3VX7IUrbHzV3PJC5-ZyaDCpJhptx0NPbJ5Azfsf4qFAbbisLsQJ0X1Fdw2yyecqLVoCv5QPfPKSKfpKaTGHgK53HZUmHfoS3o6q5sBBOxKe_tGPoajKKtFWUsfqac5HEsosX6jw",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlBfVnJpcDNjMl91R093UVluQkp0SSJ9.eyJpc3MiOiJodHRwczovL2hvbGVjc2thLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MDM5NDc0MTc3YzNmMzAwNjk2MmUxOWQiLCJhdWQiOiJjYXBzdG9uZV9pZGVudGlmaWVyIiwiaWF0IjoxNjE1MDU4NzkwLCJleHAiOjE2MTUwNjU5OTAsImF6cCI6InFoREpWNzBzdlZjTm5qUmtIVVV0eHFPRHlGcXoxbFRKIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDplbGVtZW50cyIsInBhaXI6YWN0b3JzX21vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDptb3ZpZXMiXX0.KhM7u7bYLnzyVgT1Af7d2icxDipcMivQ5kZiG0FDOhjckwFKXBx132JpxvD10MVfEy4MPZyWv0IcRRhln46QpCmeKLzHJTiEltj1Ms9kxQWaBoDbSmjvhy5AfyL0O-GguLG7bva6n029n7sD9Nv7Cd6LncVhuCkBnLJ3AbMxNZGHtRDHnRIfo9Smz31nvjFCirQgSdqmlWHImII312SACQi6Ps8LhZH0u1NlNOFBnmanFKAyYhNW_ihRj8JPXEVa2ycf9IROuiRGOEie_EpSjsLaLeZL3WIME5EbaCxYmekJoicrdWoYajiMYuQnDwf7U5Raa9F0mP8FPjWBvhv_0A",
 						"type": "string"
 					}
 				]
-			}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		}
 	],
 	"event": [
