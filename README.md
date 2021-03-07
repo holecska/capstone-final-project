@@ -87,7 +87,7 @@ The API will return four error types when requests fail:
 ```
 {
   "movies": [
-    {
+		{
 			"id": 1,
 			"title": "Joker",
 			"release_date": "2019.10.25"
