@@ -66,9 +66,9 @@ https://udacity-capstone-adam-holecska.herokuapp.com/
 Errors are returned as JSON objects in the following format:
 ```
 {
-    "success": False,
-    "error": 400,
-    "message": "bad request"
+  "success": False,
+  "error": 400,
+  "message": "bad request"
 }
 ```
 The API will return four error types when requests fail:
@@ -87,16 +87,16 @@ The API will return four error types when requests fail:
 ```
 {
   "movies": [
-				    {
-							"id": 1,
-							"title": "Joker",
-							"release_date": "2019.10.25"
-						},
-						{
-							"id": 1,
-							"title": "Joker New",
-							"release_date": "2020.10.25"
-						}
+    {
+			"id": 1,
+			"title": "Joker",
+			"release_date": "2019.10.25"
+		},
+		{
+			"id": 1,
+			"title": "Joker New",
+			"release_date": "2020.10.25"
+		}
   ],
   "success": true
 }
@@ -110,7 +110,7 @@ The API will return four error types when requests fail:
 
 ```
 {
-  "actors": [
+	"actors": [
 		{
 			"age": 46,
 			"id": 1,
@@ -122,8 +122,8 @@ The API will return four error types when requests fail:
 			"name": "Actor 1",
 			"gender": "women"
 		}
-  ],
-  "success": true
+	],
+	"success": true
 }
 ```
 
@@ -138,12 +138,12 @@ The API will return four error types when requests fail:
 - Returns:
 ```
 {
-    "movie": {
-        "id": 11,
-        "release_date": "Thu, 03 Oct 2019 00:00:00 GMT",
-        "title": "Joker"
-    },
-    "success": true
+  "movie": {
+      "id": 11,
+      "release_date": "Thu, 03 Oct 2019 00:00:00 GMT",
+      "title": "Joker"
+  },
+  "success": true
 }
 ```
 
@@ -159,12 +159,12 @@ The API will return four error types when requests fail:
 - Returns:
 ```
 {
-    "actor": {
-		    "name": "Joaquin Phoenix",
-		    "age": "46",
-		    "gender": "men"
-		},
-    "success": true
+  "actor": {
+	    "name": "Joaquin Phoenix",
+	    "age": "46",
+	    "gender": "men"
+	},
+  "success": true
 }
 ```
 
@@ -178,8 +178,8 @@ The API will return four error types when requests fail:
 - Returns:
 ```
 {
-    "changed_movie": <movie_id>,
-    "success": true
+  "changed_movie": <movie_id>,
+  "success": true
 }
 ```
 
@@ -193,8 +193,8 @@ The API will return four error types when requests fail:
 - Returns:
 ```
 {
-    "changed_actor": <actor_id>,
-    "success": true
+  "changed_actor": <actor_id>,
+  "success": true
 }
 ```
 
@@ -206,8 +206,8 @@ The API will return four error types when requests fail:
 - Returns:
 ```
 {
-    "deleted_movie": <movie_id>,
-    "success": true
+  "deleted_movie": <movie_id>,
+  "success": true
 }
 ```
 
@@ -219,7 +219,7 @@ The API will return four error types when requests fail:
 - Returns:
 ```
 {
-    "deleted_actor": <actor_id>,
-    "success": true
+  "deleted_actor": <actor_id>,
+  "success": true
 }
 ```
